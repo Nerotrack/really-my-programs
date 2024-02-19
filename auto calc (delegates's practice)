@@ -1,0 +1,27 @@
+using System;
+using System.Text;
+
+namespace chatgamespace
+{
+    class Program
+    {
+        public delegate float AutoCalcFunction(float a, float b);
+
+        static void Main()
+        {
+            Console.WriteLine("Привет, отправь мне два числа, я отправлю тебе \nсумму, разность, произведение и частное этих чисел.");
+            int input_1 = Convert.ToInt16(Console.ReadLine());
+            int input_2 = Convert.ToInt16(Console.ReadLine());
+
+            AutoCalcFunction auto = new(Summ);
+                             auto += Vichit;
+                             auto += Proizv;
+                             auto += Delen;
+
+            Console.WriteLine("===========\nРезультаты:");
+
+            auto(input_1, input_2);
+
+        }
+    }
+}
