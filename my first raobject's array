@@ -1,0 +1,54 @@
+class Program : Object
+{
+
+static void Main()
+        {
+            Student[] students = new Student[5];
+            
+            Console.WriteLine("Пять абсолютно случайных студентов.");
+
+            int count = 1;
+            for(int i = 0; i < students.Length; i++)
+            {
+                students[i] = new($"Студент {count}", age: 0, weight: 0, height: 0);
+                students[i].Print();
+
+                count++;
+
+                Thread.Sleep(450);
+            }
+
+        }
+
+}
+
+    class Student
+    {
+        public Random random = new Random();
+
+        private string name = "Unnasigned";
+        private int age = 18;
+        private int weight = 0;
+        private int height = 0;
+
+
+        public Student(string name, int age)
+        {
+            this.name = name;
+            
+            age = random.Next(18, 40);            
+            this.age = age;
+        }
+
+        public Student(string name, int age, int weight, int height) : this(name, age)
+        {
+            weight = random.Next(55, 89);
+            this.weight = weight;
+
+            height = random.Next(172, 199);
+            this.height = height;
+        }
+
+        public void Print() => Console.WriteLine($"Имя: {name}\nВозраст: {age}\nВес: {weight} кг\nРост: {weight} см.\n");
+
+    }
