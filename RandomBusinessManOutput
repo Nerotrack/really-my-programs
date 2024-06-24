@@ -1,0 +1,52 @@
+        class MyClass
+        {
+            public string Name { get; set; } 
+            public int Age { get; set; } = 18;
+            public string Company { get; set; } = "Отсутствует";
+
+            public MyClass() { }
+
+            public MyClass(string name, int age)
+            {
+                Name = name;
+                Age = age;
+            }
+
+            public MyClass(string name, int age, string company) : this(name, age)
+            {
+                Company = company;
+            }
+
+            public void Print() => Console.WriteLine($"Имя: {Name} | Возраст: {Age} | Компания: {Company}\n");
+        }
+        
+        static void Main()
+        {
+            Random rNames = new Random();
+            string[] Names = {"Mark", "Jack", "Uilliam", "Kristor", "Hobbit", "David", "Robert", "Alex", "Freddy", "Lark", "Clar", "Kaisy"};
+
+            Random rAge = new Random();
+
+            Random rCompany = new Random();
+            string[] Companies = {"Coca-Cola", "Mikron", "Shein", "Apple", "Mosvodostok", "Tatneft\'", "RosTelekom", "Tele2", "Disney", "WildBerries"};
+
+            Console.Write($"Впишите количество предпринимателей: ");
+            int quantity = Convert.ToInt32(Console.ReadLine());
+
+            MyClass[] businessMan = new MyClass[quantity];
+
+            for(int i = 0; i < businessMan.Length; i++)
+            {
+                businessMan[i] = new MyClass();
+            }
+
+            for(int i = 0; i < businessMan.Length; i++)
+            {
+                businessMan[i].Name = Names[rNames.Next(0, Names.Length)];
+                businessMan[i].Age = rAge.Next(20, 51);
+                businessMan[i].Company = Companies[rCompany.Next(0, Companies.Length)];
+
+                Console.Write($"Предприниматель {i + 1}: ");    businessMan[i].Print();
+            }
+
+        }
