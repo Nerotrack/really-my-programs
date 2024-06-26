@@ -1,0 +1,35 @@
+using chatgamespace_VectorExtensions;
+
+namespace chatgamespace
+{
+      class Program
+      {
+            static void Main()
+            {
+                  Vector3 v = new Vector3(2, 4, 6);
+
+                  Console.WriteLine($"Вектор до: {v}"); // 2, 4, 6.
+
+                  int value = 2;
+                  v = v.MoveDiagonal(value);
+
+                  Console.WriteLine($"Вектор сдвинут по диагонали на {value} единиц: {v}");
+            }
+
+      }
+
+}
+
+namespace chatgamespace_VectorExtensions
+{
+    static class Vector3Extensions
+    {
+        static public Vector3 MoveDiagonal(this Vector3 v, int value)
+        {
+            v = new Vector3(v.X + value, v.Y + value, v.Z + value);
+            return v;
+        }
+
+    }
+
+}
