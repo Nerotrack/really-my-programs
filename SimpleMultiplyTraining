@@ -23,6 +23,7 @@ static void Main()
                 
                 if(input == -1)
                 {
+                    Console.WriteLine("Вы ввели -1, выход!");
                     return;
                 }
             }
