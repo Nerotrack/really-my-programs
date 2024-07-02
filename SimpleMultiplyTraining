@@ -1,0 +1,29 @@
+static void Main()
+        {
+            int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+            Random r = new Random();
+
+            for(bool i = true; i == true; i = true)
+            {
+                int r1 = r.Next(9);
+                int r2 = r.Next(9);
+
+                int correctAnswer = a[r1] * a[r2];
+
+                Console.WriteLine($"Сколько будет {a[r1]} * {a[r2]}? \t | Чтобы выйти, отправь -1.");
+
+                int input = Convert.ToInt32(Console.ReadLine());
+                
+                if(input == correctAnswer)
+                    Console.WriteLine("Правильно!");
+                
+                else
+                    Console.WriteLine("Неправильно, попробуй ещё раз.");
+                
+                if(input == -1)
+                {
+                    return;
+                }
+            }
+        }
