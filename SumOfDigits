@@ -1,0 +1,19 @@
+static void Main()
+        {
+            int number = 561;
+            
+            int result = SumOfDigits(number);
+            Console.WriteLine(result);
+
+        }
+
+static int SumOfDigits(int number)
+        {
+            if(number < 10)
+                return number;
+
+            int nextNum = number / 10;
+            int digit = number % 10;
+
+            return digit + SumOfDigits(nextNum);
+        }
