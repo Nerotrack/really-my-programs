@@ -1,0 +1,37 @@
+        delegate double ArithmeticOperation(double a, double b);
+
+        static void Main()
+        {
+            int a = 5, b = 0;
+            Console.WriteLine($"Числа: {a} и {b}");
+
+            ArithmeticOperation arithOp = new ArithmeticOperation(Sum);
+            Console.WriteLine("Сумма: " + arithOp(a, b));
+
+            arithOp = new ArithmeticOperation(Describe);
+            Console.WriteLine("Разность: " + arithOp(a, b));
+
+            arithOp = new ArithmeticOperation(Multiply);
+            Console.WriteLine("Произведение: " + arithOp(a, b));
+
+            try
+            {
+                arithOp = new ArithmeticOperation(Divide);
+                Console.WriteLine("Частное: " + arithOp(a, b));
+            }
+            catch(DivideByZeroException)
+            {
+                Console.WriteLine("Произошло деление на ноль.");
+            }
+
+        }
+        static double Sum(double x, double y) => x + y;
+        static double Describe(double x, double y) => x - y;
+        static double Multiply(double x, double y) => x * y;
+        static double Divide(double x, double y)
+        {
+            if(y == 0)
+                throw new DivideByZeroException();
+            
+            return x / y;
+        }
