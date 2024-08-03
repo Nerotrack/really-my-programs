@@ -1,0 +1,45 @@
+        public delegate void TranzactionMessage(string message);
+
+        public class BankAccount
+        {
+            private double _balance = 0;
+            public BankAccount() { }
+            public BankAccount(double balance)
+            => _balance = balance;
+
+            public void Deposit(double value, TranzactionMessage tranzaction)
+            {
+                if(value > 0)
+                {
+                    _balance += value;
+                    tranzaction?.Invoke($"На баланс зачислено {value} рублей.");
+                }
+                    
+                else
+                    throw new ArgumentException("Депозит не может быть отрицательным или равным нулю.");
+            }
+            public void Take(double value, TranzactionMessage tranzaction)
+            {
+                if(value <= _balance)
+                {
+                    _balance -= value;
+                    tranzaction?.Invoke($"С баланса снято {value} рублей.");
+                }
+                else
+                    throw new ArgumentException("Вычитаемое значение больше баланса.");
+            }
+            public double GetBalance() => _balance;
+            
+        }
+
+        static void Main()
+        {
+            BankAccount account = new BankAccount(10);
+            account.Deposit(10, PrintTrMessageInConsole);
+
+            account.Deposit(50, PrintTrMessageInDB);
+            Console.WriteLine($"Баланс: {account.GetBalance()}");
+        }
+
+        static void PrintTrMessageInConsole(string message) => Console.WriteLine(message);
+        static void PrintTrMessageInDB(string message) => Console.WriteLine($"Происходила какая-то логика и в ячейке таблицы базы данных вывелось следующее сообщение:\n{message}");
