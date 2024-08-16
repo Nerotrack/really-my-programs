@@ -1,0 +1,41 @@
+    MyClass myClass = new MyClass();
+    Listener listener = new Listener();
+
+    myClass.MouseMove += listener.ShowMouseDataInConsole;
+
+    while (true)
+    {
+        myClass.Update();
+        myClass.OnClicked();
+        Thread.Sleep(50);
+    }
+}
+private delegate void MouseMoveEventHandler(object? sender, MouseMoveEventArgs e);
+class MyClass
+{
+    public event MouseMoveEventHandler? MouseMove;
+    public Point MouseCoordinates { get; private set; }
+            
+    public void Update()
+    {
+        MouseCoordinates = new Point( new Random().Next(0, 1080) , new Random().Next(0, 720) );
+    }
+    public void OnClicked()
+    {
+        MouseMoveEventArgs clickedData = new MouseMoveEventArgs(MouseCoordinates);
+        MouseMove?.Invoke(this, clickedData);
+    }
+}
+class MouseMoveEventArgs : EventArgs
+{
+    public Point MouseCoordinates { get; }
+    public MouseMoveEventArgs(Point mouseCoordinates)
+    => MouseCoordinates = mouseCoordinates;
+}
+class Listener
+{
+    public void ShowMouseDataInConsole(object? sender, MouseMoveEventArgs e)
+    {
+        e.MouseCoordinates.Print();
+    }
+}
